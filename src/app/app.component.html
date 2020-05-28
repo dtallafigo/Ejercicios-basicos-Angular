@@ -1,8 +1,35 @@
-<div *ngFor="let country of getCountries()">
-  <ul>
-    <li>Description</li>
-  </ul>
-  <p>{{country.description}}</p>
-  <p>{{country.prefix}}</p>
-  <p>{{country.language}}</p>
-</div>
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
+</mat-form-field>
+<mat-table [dataSource]="getPersonsView()" matSort>
+  <ng-container matColumnDef="phone">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Telefono de contacto</mat-header-cell>
+    <mat-cell *matCellDef="let user"> {{user.phone}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="sex">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Sexo</mat-header-cell>
+    <mat-cell *matCellDef="let user"> {{user.sex}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Completo</mat-header-cell>
+    <mat-cell *matCellDef="let user"> {{ user.name }} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="birthday">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de nacimiento</mat-header-cell>
+    <mat-cell *matCellDef="let user"> {{ user.datebirthday | date:'yyyy-MM-dd'}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="country">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Pais</mat-header-cell>
+    <mat-cell *matCellDef="let user"> {{ user.countryId}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="lastModification">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Ultima modificacion</mat-header-cell>
+    <mat-cell *matCellDef="let user"> {{ user.lastModification | date: 'yyyy-MM-dd HH:mm a'}} </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+  <mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></mat-row>
+
+  <mat-paginator [pageSize]="3" [pageSizeOptions]="[3, 5, 10]"></mat-paginator>
+</mat-table>
+
