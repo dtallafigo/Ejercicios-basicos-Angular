@@ -4,27 +4,27 @@
 </mat-form-field>
 <mat-table [dataSource]="getPersonsView()" matSort>
   <ng-container matColumnDef="phone">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Telefono de contacto</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header>{{columnsTitle[0]}}</mat-header-cell>
     <mat-cell *matCellDef="let user"> {{user.phone}} </mat-cell>
   </ng-container>
   <ng-container matColumnDef="sex">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Sexo</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header> {{columnsTitle[1]}}</mat-header-cell>
     <mat-cell *matCellDef="let user"> {{user.sex}} </mat-cell>
   </ng-container>
   <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Completo</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header> {{columnsTitle[2]}}</mat-header-cell>
     <mat-cell *matCellDef="let user"> {{ user.name }} </mat-cell>
   </ng-container>
   <ng-container matColumnDef="birthday">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de nacimiento</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header> {{columnsTitle[3]}}</mat-header-cell>
     <mat-cell *matCellDef="let user"> {{ user.datebirthday | date:'yyyy-MM-dd'}} </mat-cell>
   </ng-container>
   <ng-container matColumnDef="country">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Pais</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header> {{columnsTitle[4]}}</mat-header-cell>
     <mat-cell *matCellDef="let user"> {{ user.countryId}} </mat-cell>
   </ng-container>
   <ng-container matColumnDef="lastModification">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Ultima modificacion</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header> {{columnsTitle[5]}}</mat-header-cell>
     <mat-cell *matCellDef="let user"> {{ user.lastModification | date: 'yyyy-MM-dd HH:mm a'}} </mat-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>

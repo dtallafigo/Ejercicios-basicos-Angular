@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {PersonView} from './entities/PersonView.entities';
-import {columnToDisplay} from './entities/tableProperties.entities';
+import {columnToDisplay, columnTitle} from './entities/tableProperties.entities';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
@@ -16,6 +16,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   infoURL = '../assets/info-population.json';
   res = new Map<string, []>();
   columnsToDisplay = columnToDisplay;
+  columnsTitle = columnTitle;
   persons: any = [];
   dataSource: any;
   public readonly COUNTRY_ID = 'COUNTRY';
@@ -25,11 +26,11 @@ export class AppComponent implements OnInit, AfterViewInit {
   constructor(private http: HttpClient) {
   }
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatSort) sort: MatSort;
   ngOnInit() {
     this.http.get(this.dataSourceURL).subscribe(resp => {
       this.res.set(this.COUNTRY_ID, resp.data.country);
-      this.res.set(this.SEX_ID, resp.data.sex);
+      this.res.set(this.SEX_ID, resp['data']['sex']);
     });
     this.http.get(this.infoURL).subscribe(resp => {
       this.res.set(this.PERSON_ID, resp.population.person);
@@ -55,7 +56,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       population.forEach(element => {
         const personAux = new PersonView();
         personAux.name = `${element.surname}  ${element.surname2} ,  ${element.name}`;
-        personAux.countryId = this.getCountries()[element['country-id'] - 1].description;
+        personAux.countryId = this.getCountries()[element['country-id'] - 1]['description'];
         personAux.datebirthday = element.datebirthday;
         personAux.setSex(element.sex, this.getSexs());
         personAux.id = element.id;
